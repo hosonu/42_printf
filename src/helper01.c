@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper01.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:56:04 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/22 15:01:48 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/10/22 16:04:18 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	print_s(char *s, t_list *format)
 	format->output_len = len;
 	if(format->flags == 1 && format->minus == 0  && format->fields_width > 0)
 		print_fields(format->output_len, format);
-	if(s == NULL && format->precision == 1 && format->prec_width < 6)
-		len = 0;
     if(s == NULL)
         format->cnt += write(1, "(null)", len);
     else

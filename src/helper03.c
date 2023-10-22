@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper03.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 02:24:08 by hosonu            #+#    #+#             */
-/*   Updated: 2023/10/22 15:04:30 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/10/22 17:45:27 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void print_x(size_t num, t_list *format)
 		len = format->prec_width;
     if(format->flags == 1 && format->minus == 0)
 	{
-
         print_fields(len, format);
 	}
 	if(format->precision == 1)
@@ -69,7 +68,6 @@ void print_cap_x(size_t num, t_list *format)
 		len = format->prec_width;
     if(format->flags == 1 && format->minus == 0)
 	{
-
         print_fields(len, format);
 	}
 	if(format->precision == 1)
@@ -81,12 +79,6 @@ void print_cap_x(size_t num, t_list *format)
 
 void print_p(void *p, t_list *format)
 {
-    if(p == 0)
-	{
-		format->cnt += write(1, "(nil)", 5);
-        format->output_len = 5;
-		return ;
-	}
     format->cnt += write(1, "0x", 2);
     format->output_len += 2;
     get_digits_hex((size_t)p, format);
