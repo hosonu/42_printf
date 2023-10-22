@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:59:52 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/22 17:17:17 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/23 02:48:09 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 int	main(void)
 {
 	char *str = NULL;
-	// printf("%d\n", printf("real: %-1.8d\n", 0));
-	printf("%d\n", ft_printf("%-10d\n", 0));
+	printf("%d\n", printf("%010.5d\n", -123));
+	printf("%d\n", ft_printf("%010.5d\n", -123));
 }

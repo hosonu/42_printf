@@ -6,7 +6,7 @@
 /*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:42:23 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/22 14:41:39 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/10/23 02:33:52 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void print_x(size_t num, t_list *format);
 void print_cap_x(size_t num, t_list *format);
 void print_p(void *p, t_list *format);
 void print_fields(size_t len, t_list *format);
+void put_nback_fields(size_t len, t_list *format);
 void print_pwidth(size_t len, t_list *format);
 
 void		check_flags(char *str, t_list *format);

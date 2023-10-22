@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:48:37 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/22 16:45:50 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/23 03:18:19 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	main_print(char *str, va_list args, t_list *format)
 		if (format->flags == 1 && format->minus == 0)
 			print_fields(1, format);
 		print_c(va_arg(args, int), format);
+		if(format->flags == 1 && format->minus == 1)
+			print_fields(1, format);
 	}
 	else if (*str == 's')
 		print_s(va_arg(args, char *), format);
@@ -53,6 +55,26 @@ void	initializer(t_list *format)
 	format->p_move = 0;
 }
 
+void printf_subfunc(char *str, va_list args, t_list *format)
+{
+	while (*str != '\0')
+	{
+		initializer(format);
+		if (*str == '%')
+		{
+			str++;
+			check_flags(str, format);
+            str += format->p_move;
+			check_precision(str, format);
+            str += format->p_move;
+			main_print(str, args, format);
+		}
+		else
+			print_c(*str, format);
+		str++;
+	}
+}
+
 int	ft_printf(const char *str, ...)
 {
 	va_list args;
@@ -64,24 +86,7 @@ int	ft_printf(const char *str, ...)
 	if (format == NULL)
 		return (-1);
 	format->cnt = 0;
-	while (*str != '\0')
-	{
-		initializer(format);
-		if (*str == '%')
-		{
-			str++;
-			check_flags((char *)str, format);
-            str += format->p_move;
-			check_precision((char *)str, format);
-            str += format->p_move;
-			main_print((char *)str, args, format);
-			if(format->flags == 1 && format->minus == 1)
-				print_fields(format->output_len, format);
-		}
-		else
-			print_c(*str, format);
-		str++;
-	}
+	printf_subfunc((char *)str, args, format);
 	cnt = format->cnt;
 	free(format);
 	return (cnt);

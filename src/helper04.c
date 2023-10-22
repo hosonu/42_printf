@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper04.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 00:57:24 by hosonu            #+#    #+#             */
-/*   Updated: 2023/10/22 17:49:17 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/23 03:11:39 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,30 @@ void	print_fields(size_t len, t_list *format)
 	ssize_t	lens;
 
 	lens = 0;
-	if (format->fields_width > len && format->minus == 0)
+	if (format->fields_width > len)
 		lens = format->fields_width - len - format->is_minus;
-	// else if (format->fields_width > len && format->minus == 1
-	// 	&& format->fields_width > format->prec_width && format->precision == 1
-	// 	&& format->prec_width > len)
-	// 	lens = format->fields_width - format->prec_width - format->is_minus;
-	// else if (format->fields_width > len && format->minus == 1
-	// 	&& format->fields_width > format->prec_width && format->precision == 1
-	// 	&& format->prec_width <= len)
-	// 	lens = format->fields_width - len - format->is_minus;
-	// else if (format->fields_width > len && format->minus == 1
-	// 	&& format->precision == 0)
-	// 	lens = format->fields_width - len - format->is_minus;
 	if (format->sharp == 1)
 		lens -= 2;
 	if (format->plus == 1)
 		lens--;
-	if (format->zero == 1)
+	if (format->zero == 1 && format->precision == 0)
 		print_zero(lens, format);
 	else
 		print_space(lens, format);
+}
+
+void put_nback_fields(size_t len, t_list *format)
+{
+	ssize_t	lens;
+
+	lens = 0;
+	if (format->fields_width > len)
+		lens = format->fields_width - len - format->is_minus;
+	if (format->sharp == 1)
+		lens -= 2;
+	if (format->plus == 1)
+		lens--;
+	print_space(lens, format);
 }
 
 void	print_pwidth(size_t len, t_list *format)

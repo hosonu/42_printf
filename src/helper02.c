@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper02.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:32:31 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/22 17:32:42 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/23 03:01:04 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,20 @@ void get_digit(size_t num, t_list *format)
 	}
 }
 
+void put_after_sign(t_list *format, int num)
+{
+	if(format->plus == 1 && format->is_minus == 0)
+		print_c('+', format);
+	if(num < 0 && format->zero == 1 && format->is_minus == 1 && format->precision == 1)
+		format->cnt += write(1, "-", 1);
+	if(num < 0 && format->zero == 0 && format->is_minus == 1)
+		format->cnt += write(1, "-", 1);
+}
+
 void	print_d(int num, t_list *format)
 {
 	long long	nb;
 	size_t len;
-	bool is_zero;
 
 	nb = num;
 	if (nb < 0)
@@ -42,27 +51,21 @@ void	print_d(int num, t_list *format)
 		format->is_minus = 1;
 		nb *= -1;
 	}
-	is_zero = format->zero;
 	get_digit(nb, format);
 	len = format->output_len;
 	if(format->precision == 1 && format->prec_width > format->output_len)
 		len = format->prec_width;
-	if(num < 0 && is_zero == 1 && format->is_minus == 1 && format->precision == 0)
+	if(num < 0 && format->zero == 1 && format->is_minus == 1 && format->precision == 0)
 		format->cnt += write(1, "-", 1);
-	if(format->precision == 1 && format->zero == 1)
-		format->zero = 0;
 	if(format->flags == 1 && format->minus == 0)
 		print_fields(len, format);
-	if(format->plus == 1 && format->is_minus == 0)
-		print_c('+', format);
-	if(num < 0 && is_zero == 1 && format->is_minus == 1 && format->precision == 1)
-		format->cnt += write(1, "-", 1);
-	if(num < 0 && is_zero == 0 && format->is_minus == 1)
-		format->cnt += write(1, "-", 1);
+	put_after_sign(format, num);
 	if(format->precision == 1)
 		print_pwidth(format->output_len, format);
 	if(!(format->precision == 1 && nb == 0))
 		nb_rec(nb, format);
+	if(format->flags == 1 && format->minus == 1)
+		put_nback_fields(len, format);
 }
 
 void	print_u(unsigned int num, t_list *format)
@@ -79,5 +82,8 @@ void	print_u(unsigned int num, t_list *format)
 		print_fields(len, format);
 	if(format->precision == 1)
 		print_pwidth(format->output_len, format);
-	nb_rec(num, format);
+	if(!(format->precision == 1 && num == 0))
+		nb_rec(num, format);
+	if(format->flags == 1 && format->minus == 1)
+		put_nback_fields(len, format);
 }
