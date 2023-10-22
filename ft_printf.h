@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:42:23 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/21 16:17:39 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/22 14:41:39 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct p_list
 	size_t	cnt;
 	size_t	fields_width;
 	size_t	prec_width;
+	size_t output_len;
 	size_t p_move;
 	bool	flags;
 	bool	sharp;
@@ -32,6 +33,7 @@ typedef struct p_list
 	bool	minus;
 	bool	zero;
 	bool	precision;
+	bool	is_minus;
 
 }			t_list;
 
@@ -39,6 +41,12 @@ int			ft_printf(const char *str, ...);
 void		print_c(char c, t_list *format);
 void		print_s(char *s, t_list *format);
 void		print_d(int num, t_list *format);
+void		print_u(unsigned int num, t_list *format);
+void print_x(size_t num, t_list *format);
+void print_cap_x(size_t num, t_list *format);
+void print_p(void *p, t_list *format);
+void print_fields(size_t len, t_list *format);
+void print_pwidth(size_t len, t_list *format);
 
 void		check_flags(char *str, t_list *format);
 void		check_precision(char *str, t_list *format);

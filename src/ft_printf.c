@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:48:37 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/21 16:40:21 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/22 14:41:49 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,34 @@
 
 void	main_print(char *str, va_list args, t_list *format)
 {
-	if (*str == '%')
-		print_c('%', format);
-	else if (*str == 'c')
+	if (*str == 'c')
+	{
+		format->output_len = 1;
+		if (format->flags == 1 && format->minus == 0)
+			print_fields(1, format);
 		print_c(va_arg(args, int), format);
+	}
 	else if (*str == 's')
 		print_s(va_arg(args, char *), format);
     else if(*str == 'd' || *str == 'i')
         print_d(va_arg(args, int), format);
-    
+	else if(*str == 'u')
+		print_u(va_arg(args, unsigned int), format);
+	else if(*str == 'x')
+		print_x(va_arg(args, unsigned int), format);
+	else if(*str == 'X')
+		print_cap_x(va_arg(args, unsigned int), format);
+	else if(*str == 'p')
+		print_p(va_arg(args, void *), format);
+	else if(*str == '%')
+		print_c('%', format);
 }
 
 void	initializer(t_list *format)
 {
     format->fields_width = 0;
     format->prec_width = 0;
+	format->output_len = 0;
 	format->flags = 0;
 	format->sharp = 0;
 	format->space = 0;
@@ -36,6 +49,7 @@ void	initializer(t_list *format)
 	format->minus = 0;
 	format->zero = 0;
 	format->precision = 0;
+	format->is_minus = 0;
 	format->p_move = 0;
 }
 
@@ -58,10 +72,11 @@ int	ft_printf(const char *str, ...)
 			str++;
 			check_flags((char *)str, format);
             str += format->p_move;
-            check_precision((char *)str, format);
+			check_precision((char *)str, format);
             str += format->p_move;
-            printf("%zu\n", format->p_move);
 			main_print((char *)str, args, format);
+			if(format->flags == 1 && format->minus == 1)
+				print_fields(format->output_len, format);
 		}
 		else
 			print_c(*str, format);

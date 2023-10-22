@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper01.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:56:04 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/21 16:17:14 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/22 15:01:48 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,6 @@ static size_t	ft_strlen(char *s)
 	return (len);
 }
 
-size_t	ft_atoi(char *str, t_list *format)
-{
-	size_t	nb;
-
-	nb = 0;
-	while (*str && (*str >= '0' && *str <= '9'))
-	{
-		nb = nb * 10 + *str - '0';
-		str++;
-        format->p_move++;
-	}
-	return (nb);
-}
-
 void	print_c(char c, t_list *format)
 {
 	format->cnt += write(1, &c, 1);
@@ -48,9 +34,15 @@ void	print_s(char *s, t_list *format)
     size_t len;
 
     len = ft_strlen(s);
-    
+	if(format->precision == 1 && format->prec_width < len)
+		len = format->prec_width;
+	format->output_len = len;
+	if(format->flags == 1 && format->minus == 0  && format->fields_width > 0)
+		print_fields(format->output_len, format);
+	if(s == NULL && format->precision == 1 && format->prec_width < 6)
+		len = 0;
     if(s == NULL)
-        format->cnt += write(1, "(null)", 6);
+        format->cnt += write(1, "(null)", len);
     else
         format->cnt  += write(1, s, len);
 }

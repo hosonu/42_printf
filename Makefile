@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 FILES =	ft_printf.c \
 		check_flags.c \
 		get_precison.c \
-		helper01.c helper02.c
+		helper01.c helper02.c helper03.c helper04.c
 OBJS = $(SRCS:.c=.o)
 
 SRCS = $(addprefix src/, $(FILES))
