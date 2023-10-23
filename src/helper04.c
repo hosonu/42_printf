@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper04.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 00:57:24 by hosonu            #+#    #+#             */
-/*   Updated: 2023/10/23 03:11:39 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/10/23 15:56:48 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_fields(size_t len, t_list *format)
 		print_space(lens, format);
 }
 
-void put_nback_fields(size_t len, t_list *format)
+void	put_nback_fields(size_t len, t_list *format)
 {
 	ssize_t	lens;
 

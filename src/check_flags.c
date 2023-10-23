@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:05:37 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/22 04:09:03 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/10/23 15:56:41 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ size_t	ft_atoi(char *str, t_list *format)
 	{
 		nb = nb * 10 + *str - '0';
 		str++;
-        format->p_move++;
+		format->p_move++;
 	}
 	return (nb);
 }
 
-bool is_digits(char c)
+bool	is_digits(char c)
 {
-	if(c >= '0' && c <= '9')
-		return 1;
-	else 
-		return 0;
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }
 
 void	check_precision(char *str, t_list *format)
@@ -48,7 +48,8 @@ void	check_precision(char *str, t_list *format)
 
 void	check_flags(char *str, t_list *format)
 {
-	while (*str == '#' || *str == '+' || *str == '-' || *str == ' ' || *str == '0')
+	while (*str == '#' || *str == '+' || *str == '-' || *str == ' '
+		|| *str == '0')
 	{
 		format->flags = 1;
 		if (*str == '#')
@@ -64,7 +65,7 @@ void	check_flags(char *str, t_list *format)
 		str++;
 		format->p_move += 1;
 	}
-	if(is_digits(*str))
+	if (is_digits(*str))
 		format->flags = 1;
 	if (format->flags == 1)
 		format->fields_width = ft_atoi(str, format);

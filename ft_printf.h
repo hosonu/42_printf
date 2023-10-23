@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:42:23 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/23 02:33:52 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/10/23 15:55:57 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdarg.h>
 # include <stdbool.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -24,8 +23,8 @@ typedef struct p_list
 	size_t	cnt;
 	size_t	fields_width;
 	size_t	prec_width;
-	size_t output_len;
-	size_t p_move;
+	size_t	output_len;
+	size_t	p_move;
 	bool	flags;
 	bool	sharp;
 	bool	space;
@@ -42,13 +41,12 @@ void		print_c(char c, t_list *format);
 void		print_s(char *s, t_list *format);
 void		print_d(int num, t_list *format);
 void		print_u(unsigned int num, t_list *format);
-void print_x(size_t num, t_list *format);
-void print_cap_x(size_t num, t_list *format);
-void print_p(void *p, t_list *format);
-void print_fields(size_t len, t_list *format);
-void put_nback_fields(size_t len, t_list *format);
-void print_pwidth(size_t len, t_list *format);
-
+void		print_x(size_t num, t_list *format);
+void		print_cap_x(size_t num, t_list *format);
+void		print_p(void *p, t_list *format);
+void		print_fields(size_t len, t_list *format);
+void		put_nback_fields(size_t len, t_list *format);
+void		print_pwidth(size_t len, t_list *format);
 void		check_flags(char *str, t_list *format);
 void		check_precision(char *str, t_list *format);
 void		get_width(char *str, t_list *format);

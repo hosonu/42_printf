@@ -17,8 +17,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-bonus:
-	@make
+bonus: $(NAME)
 
 clean:
 	rm -f $(OBJS)

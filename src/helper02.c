@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper02.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:32:31 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/23 03:01:04 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/10/23 15:57:39 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,32 @@ void	nb_rec(size_t nb, t_list *format)
 	print_c(nb % 10 + '0', format);
 }
 
-void get_digit(size_t num, t_list *format)
+void	get_digit(size_t num, t_list *format)
 {
-	if(num == 0 && format->precision == 0 && format->prec_width == 0)
+	if (num == 0 && format->precision == 0 && format->prec_width == 0)
 		format->output_len++;
-	while(num > 0)
+	while (num > 0)
 	{
 		num /= 10;
 		format->output_len++;
 	}
 }
 
-void put_after_sign(t_list *format, int num)
+void	put_after_sign(t_list *format, int num)
 {
-	if(format->plus == 1 && format->is_minus == 0)
+	if (format->plus == 1 && format->is_minus == 0)
 		print_c('+', format);
-	if(num < 0 && format->zero == 1 && format->is_minus == 1 && format->precision == 1)
+	if (num < 0 && format->zero == 1 && format->is_minus == 1
+		&& format->precision == 1)
 		format->cnt += write(1, "-", 1);
-	if(num < 0 && format->zero == 0 && format->is_minus == 1)
+	if (num < 0 && format->zero == 0 && format->is_minus == 1)
 		format->cnt += write(1, "-", 1);
 }
 
 void	print_d(int num, t_list *format)
 {
 	long long	nb;
-	size_t len;
+	size_t		len;
 
 	nb = num;
 	if (nb < 0)
@@ -53,37 +54,38 @@ void	print_d(int num, t_list *format)
 	}
 	get_digit(nb, format);
 	len = format->output_len;
-	if(format->precision == 1 && format->prec_width > format->output_len)
+	if (format->precision == 1 && format->prec_width > format->output_len)
 		len = format->prec_width;
-	if(num < 0 && format->zero == 1 && format->is_minus == 1 && format->precision == 0)
+	if (num < 0 && format->zero == 1 && format->is_minus == 1
+		&& format->precision == 0)
 		format->cnt += write(1, "-", 1);
-	if(format->flags == 1 && format->minus == 0)
+	if (format->flags == 1 && format->minus == 0)
 		print_fields(len, format);
 	put_after_sign(format, num);
-	if(format->precision == 1)
+	if (format->precision == 1)
 		print_pwidth(format->output_len, format);
-	if(!(format->precision == 1 && nb == 0))
+	if (!(format->precision == 1 && nb == 0))
 		nb_rec(nb, format);
-	if(format->flags == 1 && format->minus == 1)
+	if (format->flags == 1 && format->minus == 1)
 		put_nback_fields(len, format);
 }
 
 void	print_u(unsigned int num, t_list *format)
 {
-	size_t len;
+	size_t	len;
 
-	if(format->plus == 1)
+	if (format->plus == 1)
 		print_c('+', format);
 	get_digit(num, format);
 	len = format->output_len;
-	if(format->precision == 1 && format->prec_width > format->output_len)
+	if (format->precision == 1 && format->prec_width > format->output_len)
 		len = format->prec_width;
-	if(format->flags == 1 && format->minus == 0)
+	if (format->flags == 1 && format->minus == 0)
 		print_fields(len, format);
-	if(format->precision == 1)
+	if (format->precision == 1)
 		print_pwidth(format->output_len, format);
-	if(!(format->precision == 1 && num == 0))
+	if (!(format->precision == 1 && num == 0))
 		nb_rec(num, format);
-	if(format->flags == 1 && format->minus == 1)
+	if (format->flags == 1 && format->minus == 1)
 		put_nback_fields(len, format);
 }
