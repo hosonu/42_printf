@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:48:37 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/23 15:58:13 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/23 16:57:32 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ int	ft_printf(const char *str, ...)
 	printf_subfunc((char *)str, args, format);
 	cnt = format->cnt;
 	free(format);
+	va_end(args);
 	return (cnt);
 }
