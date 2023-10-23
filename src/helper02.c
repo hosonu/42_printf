@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:32:31 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/23 15:57:39 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/23 20:38:41 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_digit(size_t num, t_list *format)
 
 void	put_after_sign(t_list *format, int num)
 {
-	if (format->plus == 1 && format->is_minus == 0)
+	if (format->plus == 1 && format->is_minus == 0 && format->precision == 1)
 		print_c('+', format);
 	if (num < 0 && format->zero == 1 && format->is_minus == 1
 		&& format->precision == 1)
@@ -56,9 +56,10 @@ void	print_d(int num, t_list *format)
 	len = format->output_len;
 	if (format->precision == 1 && format->prec_width > format->output_len)
 		len = format->prec_width;
-	if (num < 0 && format->zero == 1 && format->is_minus == 1
-		&& format->precision == 0)
+	if (num < 0 && format->zero == 1 && format->precision == 0)
 		format->cnt += write(1, "-", 1);
+	if (format->plus == 1 && format->zero == 1 && format->precision == 0)
+		format->cnt += write(1, "+", 1);
 	if (format->flags == 1 && format->minus == 0)
 		print_fields(len, format);
 	put_after_sign(format, num);
@@ -74,8 +75,6 @@ void	print_u(unsigned int num, t_list *format)
 {
 	size_t	len;
 
-	if (format->plus == 1)
-		print_c('+', format);
 	get_digit(num, format);
 	len = format->output_len;
 	if (format->precision == 1 && format->prec_width > format->output_len)

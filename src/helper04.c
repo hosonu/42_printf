@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 00:57:24 by hosonu            #+#    #+#             */
-/*   Updated: 2023/10/23 15:56:48 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/23 20:40:00 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	put_nback_fields(size_t len, t_list *format)
 		lens = format->fields_width - len - format->is_minus;
 	if (format->sharp == 1)
 		lens -= 2;
-	if (format->plus == 1)
+	if (format->plus == 1)//指定子がuのときはこのフラグいぞんしない
 		lens--;
 	print_space(lens, format);
 }

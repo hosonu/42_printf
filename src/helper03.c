@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 02:24:08 by hosonu            #+#    #+#             */
-/*   Updated: 2023/10/23 15:57:29 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/23 20:37:36 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	print_x(size_t num, t_list *format)
 		len = format->prec_width;
 	if (format->flags == 1 && format->minus == 0)
 		print_fields(len, format);
-	if (format->precision == 1)
-		print_pwidth(format->output_len, format);
 	if (format->sharp == 1 && num != 0)
 		format->cnt += write(1, "0x", 2);
+	if (format->precision == 1)
+		print_pwidth(format->output_len, format);
 	if (!(format->precision == 1 && num == 0))
 		hex_rec(num, 0, format);
 	if (format->flags == 1 && format->minus == 1)
@@ -75,10 +75,10 @@ void	print_cap_x(size_t num, t_list *format)
 		len = format->prec_width;
 	if (format->flags == 1 && format->minus == 0)
 		print_fields(len, format);
-	if (format->precision == 1)
-		print_pwidth(format->output_len, format);
 	if (format->sharp == 1 && num != 0)
 		format->cnt += write(1, "0X", 2);
+	if (format->precision == 1)
+		print_pwidth(format->output_len, format);
 	if (!(format->precision == 1 && num == 0))
 		hex_rec(num, 1, format);
 	if (format->flags == 1 && format->minus == 1)
