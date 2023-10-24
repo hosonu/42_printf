@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 02:24:08 by hosonu            #+#    #+#             */
-/*   Updated: 2023/10/23 20:37:36 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/24 21:14:45 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	print_x(size_t num, t_list *format)
 {
 	size_t	len;
 
-	if (format->plus == 1)
-		print_c('+', format);
 	get_digits_hex(num, format);
 	len = format->output_len;
 	if (format->precision == 1 && format->prec_width > format->output_len)
@@ -67,8 +65,6 @@ void	print_cap_x(size_t num, t_list *format)
 {
 	size_t	len;
 
-	if (format->plus == 1)
-		print_c('+', format);
 	get_digits_hex(num, format);
 	len = format->output_len;
 	if (format->precision == 1 && format->prec_width > format->output_len)

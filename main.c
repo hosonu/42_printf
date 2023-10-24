@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 20:24:32 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/23 20:40:57 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/24 21:20:59 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int main()
 {
-    printf("%d\n", ft_printf("%+010.5d\n", 19));
-    printf(("%d\n"), printf("%+010.5d\n", 19));
+    char *str = "Hello World";
+    printf("%d\n", ft_printf("%+u\n", 1));
+    printf(("%d\n"), printf("%+u\n", 1));
 }
