@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   helper01.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:56:04 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/23 15:58:08 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/25 17:33:29 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static size_t	ft_strlen(char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	len;
 

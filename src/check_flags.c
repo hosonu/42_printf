@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:05:37 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/23 15:56:41 by hoyuki           ###   ########.fr       */
+/*   Updated: 2023/10/25 17:31:18 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-
-size_t	ft_atoi(char *str, t_list *format)
-{
-	size_t	nb;
-
-	nb = 0;
-	while (*str && (*str >= '0' && *str <= '9'))
-	{
-		nb = nb * 10 + *str - '0';
-		str++;
-		format->p_move++;
-	}
-	return (nb);
-}
 
 bool	is_digits(char c)
 {
@@ -32,6 +18,20 @@ bool	is_digits(char c)
 		return (1);
 	else
 		return (0);
+}
+
+size_t	ft_atoi(char *str, t_list *format)
+{
+	size_t	nb;
+
+	nb = 0;
+	while (*str && is_digits(*str))
+	{
+		nb = nb * 10 + *str - '0';
+		str++;
+		format->p_move++;
+	}
+	return (nb);
 }
 
 void	check_precision(char *str, t_list *format)
