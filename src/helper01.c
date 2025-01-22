@@ -6,13 +6,13 @@
 /*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:56:04 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/25 17:33:29 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/12/18 17:44:38 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-size_t	ft_strlen(char *s)
+size_t	x_strlen(char *s)
 {
 	size_t	len;
 
@@ -33,7 +33,7 @@ void	print_s(char *s, t_list *format)
 {
 	size_t	len;
 
-	len = ft_strlen(s);
+	len = x_strlen(s);
 	if (format->precision == 1 && format->prec_width < len)
 		len = format->prec_width;
 	format->output_len = len;

@@ -6,13 +6,13 @@
 /*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:05:37 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/25 17:31:18 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/12/18 17:44:12 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-bool	is_digits(char c)
+bool	x_is_digits(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -20,12 +20,12 @@ bool	is_digits(char c)
 		return (0);
 }
 
-size_t	ft_atoi(char *str, t_list *format)
+size_t	x_atoi(char *str, t_list *format)
 {
 	size_t	nb;
 
 	nb = 0;
-	while (*str && is_digits(*str))
+	while (*str && x_is_digits(*str))
 	{
 		nb = nb * 10 + *str - '0';
 		str++;
@@ -42,7 +42,7 @@ void	check_precision(char *str, t_list *format)
 		format->precision = 1;
 		format->p_move += 1;
 		str++;
-		format->prec_width = ft_atoi(str, format);
+		format->prec_width = x_atoi(str, format);
 	}
 }
 
@@ -65,8 +65,8 @@ void	check_flags(char *str, t_list *format)
 		str++;
 		format->p_move += 1;
 	}
-	if (is_digits(*str))
+	if (x_is_digits(*str))
 		format->flags = 1;
 	if (format->flags == 1)
-		format->fields_width = ft_atoi(str, format);
+		format->fields_width = x_atoi(str, format);
 }

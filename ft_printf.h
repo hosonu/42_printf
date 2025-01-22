@@ -6,7 +6,7 @@
 /*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:42:23 by hoyuki            #+#    #+#             */
-/*   Updated: 2023/10/25 17:34:48 by hosonu           ###   ########.fr       */
+/*   Updated: 2023/12/18 17:45:37 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		initializer(t_list *format);
 //helper01.c functions
 void		print_c(char c, t_list *format);
 void		print_s(char *s, t_list *format);
-size_t		ft_strlen(char *s);
+size_t		x_strlen(char *s);
 
 //helper02.c functions
 void		print_d(int num, t_list *format);
@@ -71,7 +71,7 @@ void		print_zero(ssize_t len, t_list *format);
 //check_flags.c functions
 void		check_flags(char *str, t_list *format);
 void		check_precision(char *str, t_list *format);
-bool		is_digits(char c);
-size_t		ft_atoi(char *str, t_list *foramt);
+bool		x_is_digits(char c);
+size_t		x_atoi(char *str, t_list *foramt);
 
 #endif
